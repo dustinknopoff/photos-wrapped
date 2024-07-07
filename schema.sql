@@ -1,0 +1,1 @@
+create table if not exists jobs(id INT PRIMARY KEY, uuid TEXT NOT NULL, request JSONB NOT NULL, response JSONB, status INT DEFAULT 0, notified INT DEFAULT 0);

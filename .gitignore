@@ -1,0 +1,15 @@
+# python generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# venv
+.venv
+tmp_assets/**
+.DS_Store
+
+[0-9]*.json
+jobs.db

@@ -1,0 +1,41 @@
+{% import "bento.jinja" as bento %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{{year}} Wrapped</title>
+    <meta charset="utf-8" />
+    <meta name="color-scheme" content="light dark">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/static/main.css" />
+    <script type="text/javascript" src="/static/htmx.js"></script>
+</head>
+
+<body>
+    <h1>{{year}}</h1>
+    <ul class="container">
+        {{bento.top_people(top_people, "Top People", person_to_photo)}}
+        {{bento.single_stat(stats.photo, "Photos")}}
+        {{bento.single_stat(stats.movie, "Videos")}}
+        {{bento.single_stat(locations | length, "Cities")}}
+        {{bento.single_stat(camera_models | length, "Cameras")}}
+        {% if top_locations %}
+        {{bento.stacked_chart(top_locations, "Top 10 Cities", top_locations[0][1])}}
+        {% endif %}
+        {% set list_vals = months | max(attribute="1")%}
+        {{bento.stacked_chart(months, "Monthly Breakdown", list_vals[1])}}
+        {{bento.word_cloud(labels, "Top 10 Labels")}}
+    </ul>
+    <div class="photo-highlights">
+        {% for photo in photo_highlights %}
+        {% if loop.index % 9 == 0 %}
+        <img src="/{{photo}}" loading="lazy" class="star" />
+        {% else %}
+        <img src="/{{photo}}" loading="lazy" class="thumbnail" />
+        {% endif %}
+        {% endfor %}
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+{% macro single_stat(stat,description) -%}
+<li class="bento stat single">
+    <div class="bento-single">
+        <p class="bento-single-value">{{stat}}</p>
+        <p class="bento-single-description">{{description}}</p>
+    </div>
+</li>
+{%- endmacro %}
+
+{% macro stacked_chart(stats,description, max) -%}
+<li class="bento stat chart">
+    <p class="bento-single-description">{{description}}</p>
+    <ul class="stacked-bar">
+        {% for stat in stats %}
+        <li class="bar">
+            <div class="bar" style="width: {{stat[1] / max * 100}}%"></div>
+            <span>{{stat[0]}} - {{stat[1]}}</span>
+        </li>
+        {% endfor %}
+    </ul>
+</li>
+{%- endmacro %}
+
+{% macro word_cloud(stats,description) -%}
+<li class="bento stat chart full">
+    <p class="bento-single-description">{{description}}</p>
+    <ul class="cloud">
+        {% for key, value in (stats | dictsort(reverse=true, by='value'))[:120] %}
+        <li style="--size: {{value / stats | length}}" data-weight="{{value}}">
+            {{key}}
+        </li>
+        {% endfor %}
+    </ul>
+</li>
+{%- endmacro %}
+
+{% macro top_people(people,description, photo_mapping) -%}
+<li class="bento stat" style="grid-row: span 2; grid-column: span 4;">
+    <p class="bento-single-description">{{description}}</p>
+    <ul class="photos">
+        {% for person in people %}
+        {% set name = person[0]%}
+        <li>
+            <img src="/{{photo_mapping[name] | urlencode}}" loading="lazy" />
+            <p>{{name}}</p>
+            <p>{{person[1]}}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</li>
+{%- endmacro %}

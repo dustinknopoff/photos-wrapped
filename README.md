@@ -66,3 +66,11 @@ python -m src.photos_wrapped.workers.adhoc.compute_similarity_ml_worker --year 1
 ```
 
 Refreshing the page will show the newly selected photos to highlight.
+
+# Disclaimer
+
+No guarantees on this breaking your photos library, but mine didn't during the entire development process. No destructive osxphotos calls are made.
+
+Only 2 methods from osxphotos are used:
+1. `query` to get all photos for a given year.
+2. `export` to export the highlight photos and key photos for faces in a library. This does not remove them from your library.

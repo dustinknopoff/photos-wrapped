@@ -1,5 +1,5 @@
 import os
-from typing import List
+from typing import List, Optional
 from itertools import batched
 import osxphotos
 from PIL import Image
@@ -10,7 +10,7 @@ from photos_wrapped.photo_similarity import calculate_duplicates
 from photos_wrapped.photos import convert_to_jpeg
 
 
-def generate_highlights(photos: List[osxphotos.PhotoInfo]) -> List[str]:
+def generate_highlights(photos: List[osxphotos.PhotoInfo], length: Optional[int]=20) -> List[str]:
     highlights = []
     for batch in batched(photos, 20):
         poison_set = set()
@@ -33,7 +33,7 @@ def generate_highlights(photos: List[osxphotos.PhotoInfo]) -> List[str]:
         for image in image_path_list:
             if image not in poison_set and len(highlights) < 20:
                 highlights.append(image)
-        if len(highlights) == 20:
+        if len(highlights) == length:
             break
         logging.info(f"Current length of highlights: {len(highlights)}")
     return highlights

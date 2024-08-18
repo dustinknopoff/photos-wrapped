@@ -6,7 +6,7 @@ authors = [
     { name = "Dustin Knopoff", email = "dustin@knopoff.dev" }
 ]
 dependencies = [
-    "osxphotos>=0.68.2",
+    "osxphotos>=0.68.5",
     "fastapi>=0.111.0",
     "black>=24.4.2",
     "litequeue>=0.8",

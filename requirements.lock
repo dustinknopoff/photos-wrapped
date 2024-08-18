@@ -125,7 +125,7 @@ orjson==3.10.6
     # via fastapi
 osxmetadata==1.3.5
     # via osxphotos
-osxphotos==0.68.2
+osxphotos==0.68.5
     # via photos-wrapped
 packaging==24.1
     # via black

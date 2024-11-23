@@ -11,7 +11,7 @@
 -e file:.
 annotated-types==0.7.0
     # via pydantic
-anyio==4.4.0
+anyio==4.6.2.post1
     # via httpx
     # via starlette
     # via watchfiles
@@ -19,28 +19,28 @@ appdirs==1.4.4
     # via ptpython
 arpeggio==2.0.2
     # via textx
-bitarray==2.9.2
+bitarray==2.9.3
     # via bitstring
 bitmath==1.3.3.1
     # via osxphotos
 bitstring==4.2.3
     # via osxmetadata
-black==24.4.2
+black==24.10.0
     # via photos-wrapped
 blessed==1.17.12
     # via objexplore
 bpylist2==4.1.1
     # via osxphotos
-certifi==2024.7.4
+certifi==2024.8.30
     # via httpcore
     # via httpx
     # via requests
-cffi==1.16.0
+cffi==1.17.1
     # via xattr
-cgmetadata==0.1.6
+cgmetadata==0.2.0
     # via makelive
     # via osxphotos
-charset-normalizer==3.3.2
+charset-normalizer==3.4.0
     # via requests
 click==8.1.7
     # via black
@@ -49,40 +49,40 @@ click==8.1.7
     # via osxphotos
     # via typer
     # via uvicorn
-dnspython==2.6.1
+dnspython==2.7.0
     # via email-validator
 email-validator==2.2.0
     # via fastapi
-fastapi==0.111.0
+fastapi==0.115.5
     # via photos-wrapped
-fastapi-cli==0.0.4
+fastapi-cli==0.0.5
     # via fastapi
-filelock==3.15.4
+filelock==3.16.1
     # via huggingface-hub
     # via torch
     # via transformers
-fsspec==2024.6.1
+fsspec==2024.10.0
     # via huggingface-hub
     # via torch
 h11==0.14.0
     # via httpcore
     # via uvicorn
-httpcore==1.0.5
+httpcore==1.0.7
     # via httpx
-httptools==0.6.1
+httptools==0.6.4
     # via uvicorn
-httpx==0.27.0
+httpx==0.27.2
     # via fastapi
-huggingface-hub==0.23.4
+huggingface-hub==0.26.2
     # via sentence-transformers
     # via tokenizers
     # via transformers
-idna==3.7
+idna==3.10
     # via anyio
     # via email-validator
     # via httpx
     # via requests
-jedi==0.19.1
+jedi==0.19.2
     # via ptpython
 jinja2==3.1.4
     # via fastapi
@@ -90,17 +90,17 @@ jinja2==3.1.4
     # via torch
 joblib==1.4.2
     # via scikit-learn
-litequeue==0.8
+litequeue==0.9
     # via photos-wrapped
 mac-alias==2.2.2
     # via osxphotos
-makelive==0.6.1
+makelive==0.6.2
     # via osxphotos
 mako==1.2.4
     # via osxphotos
 markdown-it-py==3.0.0
     # via rich
-markupsafe==2.1.5
+markupsafe==3.0.2
     # via jinja2
     # via mako
 mdurl==0.1.2
@@ -111,62 +111,62 @@ mpmath==1.3.0
     # via sympy
 mypy-extensions==1.0.0
     # via black
-networkx==3.3
+networkx==3.4.2
     # via torch
-numpy==2.0.0
+numpy==2.0.2
+    # via pandas
     # via photos-wrapped
     # via scikit-learn
     # via scipy
-    # via sentence-transformers
     # via transformers
 objexplore==1.6.3
     # via osxphotos
-orjson==3.10.6
-    # via fastapi
-osxmetadata==1.3.5
+osxmetadata==1.4.0
     # via osxphotos
-osxphotos==0.68.5
+osxphotos==0.68.6
     # via photos-wrapped
-packaging==24.1
+packaging==24.2
     # via black
     # via huggingface-hub
     # via osxphotos
     # via transformers
+pandas==2.2.3
+    # via photos-wrapped
 parso==0.8.4
     # via jedi
 pathspec==0.12.1
     # via black
-pathvalidate==3.2.0
+pathvalidate==3.2.1
     # via osxphotos
 photoscript==0.3.1
     # via osxphotos
-pillow==10.4.0
+pillow==11.0.0
     # via photos-wrapped
     # via pillow-heif
     # via sentence-transformers
-pillow-avif-plugin==1.4.3
+pillow-avif-plugin==1.4.6
     # via photos-wrapped
-pillow-heif==0.17.0
+pillow-heif==0.20.0
     # via photos-wrapped
-pip==24.1.1
+pip==24.3.1
     # via osxphotos
-platformdirs==4.2.2
+platformdirs==4.3.6
     # via black
 polling==0.3.2
     # via photos-wrapped
-prompt-toolkit==3.0.47
+prompt-toolkit==3.0.48
     # via ptpython
-ptpython==3.0.27
+ptpython==3.0.29
     # via osxphotos
 py-applescript==1.0.3
     # via osxmetadata
     # via photoscript
 pycparser==2.22
     # via cffi
-pydantic==2.8.2
+pydantic==2.10.0
     # via fastapi
     # via photos-wrapped
-pydantic-core==2.20.1
+pydantic-core==2.27.0
     # via pydantic
 pygments==2.18.0
     # via ptpython
@@ -195,6 +195,7 @@ pyobjc-core==10.3.1
     # via pyobjc-framework-scriptingbridge
     # via pyobjc-framework-uniformtypeidentifiers
     # via pyobjc-framework-vision
+    # via utitools
 pyobjc-framework-applescriptkit==10.3.1
     # via osxmetadata
     # via osxphotos
@@ -244,6 +245,7 @@ pyobjc-framework-coreml==10.3.1
 pyobjc-framework-coreservices==10.3.1
     # via osxmetadata
     # via osxphotos
+    # via utitools
 pyobjc-framework-fsevents==10.3.1
     # via pyobjc-framework-coreservices
 pyobjc-framework-metal==10.3.1
@@ -259,29 +261,32 @@ pyobjc-framework-quartz==10.3.1
     # via pyobjc-framework-vision
 pyobjc-framework-scriptingbridge==10.3.1
     # via osxmetadata
-pyobjc-framework-uniformtypeidentifiers==10.3.1
-    # via cgmetadata
-    # via makelive
+pyobjc-framework-uniformtypeidentifiers==9.2
+    # via utitools
 pyobjc-framework-vision==10.3.1
     # via osxphotos
+python-dateutil==2.9.0.post0
+    # via pandas
 python-dotenv==1.0.1
     # via uvicorn
-python-multipart==0.0.9
+python-multipart==0.0.17
     # via fastapi
 pytimeparse2==1.7.1
     # via osxphotos
-pyyaml==6.0.1
+pytz==2024.2
+    # via pandas
+pyyaml==6.0.2
     # via huggingface-hub
     # via osxphotos
     # via transformers
     # via uvicorn
-regex==2024.5.15
+regex==2024.11.6
     # via transformers
 requests==2.32.3
     # via huggingface-hub
     # via osxphotos
     # via transformers
-rich==13.7.1
+rich==13.9.4
     # via cgmetadata
     # via objexplore
     # via osxphotos
@@ -289,53 +294,56 @@ rich==13.7.1
     # via typer
 rich-theme-manager==0.11.0
     # via osxphotos
-safetensors==0.4.3
+safetensors==0.4.5
     # via transformers
-scikit-learn==1.5.1
-    # via sentence-transformers
-scipy==1.14.0
+scikit-learn==1.5.2
     # via photos-wrapped
+    # via sentence-transformers
+scipy==1.14.1
     # via scikit-learn
     # via sentence-transformers
-sentence-transformers==3.0.1
+sentence-transformers==3.3.1
     # via photos-wrapped
+setuptools==75.6.0
+    # via torch
 shellingham==1.5.4
     # via typer
 shortuuid==1.0.13
     # via osxphotos
 six==1.16.0
     # via blessed
+    # via python-dateutil
 sniffio==1.3.1
     # via anyio
     # via httpx
-sqlalchemy==2.0.31
+sqlalchemy==2.0.36
     # via photos-wrapped
-starlette==0.37.2
+starlette==0.41.3
     # via fastapi
 strpdatetime==0.3.0
     # via osxphotos
-sympy==1.12.1
+sympy==1.13.1
     # via torch
-tenacity==8.4.2
+tenacity==8.5.0
     # via osxphotos
-textx==4.0.1
+textx==4.1.0
     # via osxphotos
     # via strpdatetime
 threadpoolctl==3.5.0
     # via scikit-learn
-tokenizers==0.19.1
+tokenizers==0.20.3
     # via transformers
 toml==0.10.2
     # via osxphotos
-torch==2.3.1
+torch==2.5.1
     # via sentence-transformers
-tqdm==4.66.4
+tqdm==4.67.0
     # via huggingface-hub
     # via sentence-transformers
     # via transformers
-transformers==4.41.2
+transformers==4.46.3
     # via sentence-transformers
-typer==0.12.3
+typer==0.13.1
     # via fastapi-cli
 typing-extensions==4.12.2
     # via fastapi
@@ -345,22 +353,25 @@ typing-extensions==4.12.2
     # via sqlalchemy
     # via torch
     # via typer
-ujson==5.10.0
-    # via fastapi
-urllib3==2.2.2
+tzdata==2024.2
+    # via pandas
+urllib3==2.2.3
     # via requests
-uvicorn==0.30.1
+utitools==0.1.2
+    # via cgmetadata
+uvicorn==0.32.1
     # via fastapi
-uvloop==0.19.0
+    # via fastapi-cli
+uvloop==0.21.0
     # via uvicorn
-watchfiles==0.22.0
+watchfiles==0.24.0
     # via uvicorn
 wcwidth==0.2.13
     # via blessed
     # via prompt-toolkit
-websockets==12.0
+websockets==14.1
     # via uvicorn
-wheel==0.43.0
+wheel==0.45.0
     # via cgmetadata
     # via makelive
     # via osxmetadata
@@ -372,5 +383,5 @@ wurlitzer==3.1.1
     # via osxphotos
 xattr==1.1.0
     # via osxmetadata
-xdg-base-dirs==6.0.1
+xdg-base-dirs==6.0.2
     # via osxphotos

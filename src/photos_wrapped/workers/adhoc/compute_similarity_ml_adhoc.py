@@ -4,7 +4,7 @@ import json
 import argparse
 
 from photos_wrapped.config import ASSETS_DIR_NOT_TRACKED
-from photos_wrapped.highlights_ml import generate_highlights
+from photos_wrapped.highlights_ml import Strategy, generate_highlights
 from photos_wrapped.photos import get_and_sort
 
 
@@ -18,8 +18,8 @@ def run():
         raise ValueError("You need to generate the stats first")
     photosdb = osxphotos.PhotosDB()
 
-    photos = get_and_sort(photosdb, args.year, ASSETS_DIR_NOT_TRACKED)
-    highlights = generate_highlights(photos)
+    photos = get_and_sort(photosdb, args.year)
+    highlights = generate_highlights(photos, strategy=Strategy.HDBSCAN)
     stats = {}
     with open(f"{args.year}.json", "r") as f:
         stats = json.load(f)

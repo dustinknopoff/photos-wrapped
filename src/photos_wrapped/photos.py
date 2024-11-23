@@ -1,11 +1,12 @@
 from __future__ import annotations
 from collections import Counter
-from PIL import Image
-import pillow_avif
 from pillow_heif import register_heif_opener
 
 from typing import List, Tuple, TypedDict
 import osxphotos
+
+from photos_wrapped.convert import convert_to_jpeg
+from photos_wrapped.highlights_ml import generate_hdbscan_highlights
 
 register_heif_opener()
 
@@ -57,9 +58,7 @@ class Stats(TypedDict):
     camera_models: List[str]
 
 
-def get_and_sort(
-    photosdb: osxphotos.PhotosDB, year: int, asset_dir: str
-) -> List[osxphotos.PhotoInfo]:
+def get_and_sort(photosdb: osxphotos.PhotosDB, year: int) -> List[osxphotos.PhotoInfo]:
     query = osxphotos.QueryOptions(photos=True, movies=True, year=[year])
     photos = photosdb.query(query)
     sorted_by_score = sorted(
@@ -70,19 +69,6 @@ def get_and_sort(
         reverse=True,
     )
     return sorted_by_score
-
-
-def convert_to_jpeg(photo: osxphotos.PhotoInfo, asset_dir: str) -> str:
-    if photo.adjustments:
-        [filename] = photo.export(asset_dir, overwrite=True, edited=True)
-    else:
-        [filename] = photo.export(asset_dir, overwrite=True)
-    if filename.lower().endswith("heic"):
-        heic_file = Image.open(filename)
-        jpeg_filename = filename.lower().replace(".heic", ".jpeg")
-        heic_file.save(jpeg_filename)
-        return jpeg_filename
-    return filename
 
 
 def select_without_similar(
@@ -115,8 +101,8 @@ def stats_for_year(photosdb: osxphotos.PhotosDB, year: int, asset_dir: str) -> S
         "movie": 0,
         "photo": 0,
     }
-    photos = get_and_sort(photosdb, year, asset_dir)
-    photo_highlights = select_without_similar(photos, asset_dir, quantity=20)
+    photos = get_and_sort(photosdb, year)
+    photo_highlights = generate_hdbscan_highlights(photos)
 
     for photo in photos:
         for label in photo.labels_normalized:

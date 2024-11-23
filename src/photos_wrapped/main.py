@@ -2,10 +2,8 @@ from typing import Union
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from pydantic import BaseModel
 
 from photos_wrapped.config import ASSETS_DIR_NOT_TRACKED, STATIC_DIR, TEMPLATES_DIR
-from photos_wrapped.queue import get_task, mark_notified, queue_image_task
 from .photos import Stats, stats_for_year
 from photos_wrapped.database import initialize_if_not_exists
 import osxphotos
@@ -59,24 +57,3 @@ def index(
     return templates.TemplateResponse(
         request=request, name="index.jinja", context=context
     )
-
-
-@app.post("/stats/{year}/images")
-def request_new_highlight_images(year: int):
-    return {"task_id": queue_image_task(year)}
-
-
-class ImageStatusModel(BaseModel):
-    task_id: str
-
-
-@app.get("/stats/images")
-def poll_status_images(task_id: str):
-    status = "IN_PROGRESS"
-    match get_task(task_id)[3]:
-        case 1:
-            status = "DONE"
-            mark_notified(task_id)
-        case _:
-            status = "IN_PROGRESS"
-    return {"status": status}

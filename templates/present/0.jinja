@@ -1,0 +1,8 @@
+{% extends "present/base.jinja" %}
+
+{% block content %}
+<div class="container">
+<p>You took {{stats.photo}} photos and {{stats.movie}} videos
+in {{locations | length}} cities on {{camera_models | length}} different cameras.</p>
+</div>
+{% endblock %}

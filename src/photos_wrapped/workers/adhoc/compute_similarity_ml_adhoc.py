@@ -3,7 +3,6 @@ import osxphotos
 import json
 import argparse
 
-from photos_wrapped.config import ASSETS_DIR_NOT_TRACKED
 from photos_wrapped.highlights_ml import Strategy, generate_highlights
 from photos_wrapped.photos import get_and_sort
 

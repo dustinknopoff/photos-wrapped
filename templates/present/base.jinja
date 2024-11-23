@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{{year}} Wrapped</title>
+    <meta charset="utf-8" />
+    <meta name="color-scheme" content="light dark">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/static/main.css" />
+    <script type="text/javascript" src="/static/htmx.js"></script>
+    <script type="text/javascript" src="/static/d3.js"></script>
+    <script type="text/javascript" src="/static/plot.js"></script>
+</head>
+
+<body class="animate fade">
+    <nav>
+        {% if navigation.previous is defined %}
+        <a href="/{{year}}/{{navigation.previous}}" class="previous">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none"
+                stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-chevron-left">
+                <polyline points="40.05 48.06 24.03 32.04 40.05 16.02"></polyline>
+            </svg>
+        </a>
+        {% endif %}
+        {% if navigation.next is defined %}
+        <a href="/{{year}}/{{navigation.next}}" class="next">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none"
+                stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-chevron-right">
+                <polyline points="24.03 48.06 40.05 32.04 24.03 16.02"></polyline>
+            </svg>
+        </a>
+        {% endif %}
+    </nav>
+    {% block content%}
+    {% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+ul {
+    height: 60dvh;
+    font-size: calc(var(--base) / 2);
+    min-width: 33dvw;
+}
+
+.charts {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    text-align: center;
+}
+
+li {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+ul.cities:nth-child(2)>li:nth-child(1) {
+    background-color: oklch(66.77% 0.1 200);
+}
+ul.cities:nth-child(2)>li:nth-child(2) {
+    background-color: oklch(66.77% 0.1 236);
+}
+ul.cities:nth-child(2)>li:nth-child(3) {
+    background-color: oklch(66.77% 0.1 272);
+}
+ul.cities:nth-child(2)>li:nth-child(4) {
+    background-color: oklch(66.77% 0.1 308);
+}
+ul.cities:nth-child(2)>li:nth-child(5) {
+    background-color: oklch(66.77% 0.1 344);
+}
+ul.cities:nth-child(2)>li:nth-child(6) {
+    background-color: oklch(66.77% 0.1 20);
+}
+ul.cities:nth-child(2)>li:nth-child(7) {
+    background-color: oklch(66.77% 0.1 56);
+}
+ul.cities:nth-child(2)>li:nth-child(8) {
+    background-color: oklch(66.77% 0.1 92);
+}
+ul.cities:nth-child(2)>li:nth-child(9) {
+    background-color: oklch(66.77% 0.1 128);
+}
+ul.cities:nth-child(2)>li:nth-child(10) {
+    background-color: oklch(66.77% 0.1 131);
+}
+
+ul.months:nth-child(2)>li:nth-child(1) {
+    background-color: oklch(66.77% 0.1 210);
+}
+ul.months:nth-child(2)>li:nth-child(2) {
+    background-color: oklch(66.77% 0.1 240);
+}
+ul.months:nth-child(2)>li:nth-child(3) {
+    background-color: oklch(66.77% 0.1 270);
+}
+ul.months:nth-child(2)>li:nth-child(4) {
+    background-color: oklch(66.77% 0.1 300);
+}
+ul.months:nth-child(2)>li:nth-child(5) {
+    background-color: oklch(66.77% 0.1 330);
+}
+ul.months:nth-child(2)>li:nth-child(6) {
+    background-color: oklch(66.77% 0.1 0);
+}
+ul.months:nth-child(2)>li:nth-child(7) {
+    background-color: oklch(66.77% 0.1 30);
+}
+ul.months:nth-child(2)>li:nth-child(8) {
+    background-color: oklch(66.77% 0.1 60);
+}
+ul.months:nth-child(2)>li:nth-child(9) {
+    background-color: oklch(66.77% 0.1 90);
+}
+ul.months:nth-child(2)>li:nth-child(10) {
+    background-color: oklch(66.77% 0.1 120);
+}
+ul.months:nth-child(2)>li:nth-child(11) {
+    background-color: oklch(66.77% 0.1 150);
+}
+ul.months:nth-child(2)>li:nth-child(12) {
+    background-color: oklch(66.77% 0.1 180);
+}

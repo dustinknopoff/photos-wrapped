@@ -1,39 +1,28 @@
-from typing import Union
-from fastapi import FastAPI, Request
+import json
+from typing import Annotated
+from fastapi import FastAPI, Form, Request
+from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from fastapi import Depends, FastAPI, HTTPException, Query
+from contextlib import asynccontextmanager
+
+from pydantic import BaseModel
 
 from photos_wrapped.config import ASSETS_DIR_NOT_TRACKED, STATIC_DIR, TEMPLATES_DIR
-from .photos import Stats, stats_for_year
-from photos_wrapped.database import initialize_if_not_exists
-import osxphotos
-import json
-import os
+from photos_wrapped.database import Queue, Status, create_db_and_tables, SessionDep
+from photos_wrapped.stats import load_stats
+from photos_wrapped.database import engine
 
-default_year = 2023
-initialize_if_not_exists()
 
 templates = Jinja2Templates(directory=TEMPLATES_DIR)
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    create_db_and_tables(engine)
+    yield
 
-def write_stats(year: int):
-    photosdb = osxphotos.PhotosDB()
-    stats = stats_for_year(
-        photosdb=photosdb, year=year, asset_dir=ASSETS_DIR_NOT_TRACKED
-    )
-
-    with open(f"{year}.json", "w") as f:
-        json.dump(stats, f)
-
-
-def load_stats(year: int, force_reload: bool) -> Stats:
-    if not os.path.isfile(f"{year}.json") or force_reload:
-        write_stats(year)
-    with open(f"{year}.json") as f:
-        return json.load(f)
-
-
-app = FastAPI()
+app = FastAPI(lifespan=lifespan)
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 app.mount("/tmp_assets", StaticFiles(directory=ASSETS_DIR_NOT_TRACKED), name="persons")
@@ -41,19 +30,47 @@ app.mount("/tmp_assets", StaticFiles(directory=ASSETS_DIR_NOT_TRACKED), name="pe
 
 @app.get("/")
 def index(request: Request):
-    context = load_stats(default_year, False)
-    context["year"] = default_year
     return templates.TemplateResponse(
-        request=request, name="index.jinja", context=context
+        request=request, name="index.jinja", context={}
     )
 
+class FormData(BaseModel):
+    year: int
 
-@app.get("/{year}")
-def index(
-    request: Request, year: Union[int, None] = default_year, force_reload: bool = False
-):
-    context = load_stats(year or default_year, force_reload=force_reload)
-    context["year"] = year or default_year
-    return templates.TemplateResponse(
-        request=request, name="index.jinja", context=context
-    )
+
+@app.post("/stats/new")
+def create_stats(request: Request, form: Annotated[FormData, Form()], session: SessionDep):
+    job = Queue(payload=json.dumps({ "year": form.year}))
+    session.add(job)
+    session.commit()
+    session.refresh(job)
+    return templates.TemplateResponse(request=request, name="loading.jinja", context = {
+        "job_id": job.id,
+        "year": form.year
+    })
+
+@app.get("/stats/status/{job_id}")
+def stats_status(request: Request, job_id: int,session: SessionDep):
+    job = session.get(Queue, job_id)
+    year = json.loads(job.payload)["year"]
+    if job.status == Status.COMPLETE:
+        return templates.TemplateResponse(request=request, name="go.jinja", context = {
+            "location": f"/{year}/0"
+        })
+    else:
+        return templates.TemplateResponse(request=request, name="loading.jinja", context = {
+            "job_id": job.id,
+            "year": year
+        })
+    
+@app.get("/{year}/{page}")
+def present(request: Request, year: int, page: int):
+    stats = load_stats(year, force_reload=False)
+    context = stats
+    context["year"] = year
+    context["navigation"] = {}
+    if page > 0:
+        context["navigation"]["previous"] = page - 1
+    if page < 4:
+        context["navigation"]["next"] = page + 1
+    return templates.TemplateResponse(request=request, name=f"present/{page}.jinja", context=context)

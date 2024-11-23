@@ -1,0 +1,27 @@
+{% extends "present/base.jinja" %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="/static/3.css" />
+{% set total = top_locations| sum(attribute="1") %}
+{% set month_total = months|sum(attribute="1") %}
+<div class="container">
+    <div class="charts">
+        <div class="cities">
+            <h3>Cities</h3>
+            <ul class="months">
+                {% for stat in top_locations %}
+                <li style="height: {{stat[1] / total * 100 | round}}%;">{{stat[0]}} ({{stat[1]}})</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="months">
+            <h3>Months</h3>
+            <ul class="months">
+                {% for stat in months %}
+                <li style="height: {{stat[1] / month_total * 100 | round}}%;">{{stat[0]}} ({{stat[1]}})</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

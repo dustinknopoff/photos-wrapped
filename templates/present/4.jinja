@@ -1,0 +1,13 @@
+{% extends "present/base.jinja" %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="/static/4.css" />
+<ul class="photos">
+    {% for photo in photo_highlights %}
+    <li>
+        <img src="/{{photo}}" loading="lazy" />
+    </li>
+    {% endfor %}
+</ul>
+<p class="highlights">Highlights</p>
+{% endblock %}

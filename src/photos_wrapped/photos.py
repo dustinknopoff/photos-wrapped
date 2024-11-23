@@ -26,14 +26,6 @@ num_month_to_display = {
 }
 
 
-def count_by_year(photosdb: osxphotos.PhotosDB):
-    for i in range(1945, 2025):
-        query = osxphotos.QueryOptions(
-            burst=False, screenshot=False, photos=True, year=[i]
-        )
-        print(f"{i} - {len(photosdb.query(query))}")
-
-
 class StatsTypes(TypedDict):
     selfies: int
     burst: int
@@ -69,18 +61,6 @@ def get_and_sort(photosdb: osxphotos.PhotosDB, year: int) -> List[osxphotos.Phot
         reverse=True,
     )
     return sorted_by_score
-
-
-def select_without_similar(
-    photos: List[osxphotos.PhotoInfo], asset_dir: str, quantity: int = 20
-) -> List[str]:
-    results = []
-    for photo in photos:
-        path = convert_to_jpeg(photo, asset_dir)
-        results.append(path)
-        if len(results) == quantity:
-            break
-    return results
 
 
 def stats_for_year(photosdb: osxphotos.PhotosDB, year: int, asset_dir: str) -> Stats:

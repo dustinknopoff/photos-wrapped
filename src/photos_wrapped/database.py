@@ -1,15 +1,32 @@
-import sqlite3
+from enum import IntEnum
+from typing import Annotated
+from fastapi import Depends
+from sqlalchemy import create_engine
+from sqlmodel import Field, SQLModel, Session
 
+class Status(IntEnum):
+    CREATED = 0
+    IN_PROGRESS = 1
+    COMPLETE = 2
+    ERROR = -1
 
-def initialize_if_not_exists():
-    command = """pragma journal_mode='wal';
-    create table if not exists jobs(uuid TEXT NOT NULL, request JSONB NOT NULL, response JSONB, status INT DEFAULT 0, notified INT DEFAULT 0);"""
-    db = sqlite3.connect("jobs.db")
-    cursor = db.cursor()
-    cursor.executescript(command)
-    db.close()
+class Queue(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    payload: str = Field()
+    response: str | None = Field(default=None)
+    status: int = Field(default=0)
 
+sqlite_file_name = "database.db"
+sqlite_url = f"sqlite:///{sqlite_file_name}"
 
-def create_connection():
-    db = sqlite3.connect("jobs.db", check_same_thread=False)
-    return db, db.cursor()
+connect_args = {"check_same_thread": False}
+engine = create_engine(sqlite_url, connect_args=connect_args)
+
+def create_db_and_tables(engine):
+    SQLModel.metadata.create_all(engine)
+
+def get_session():
+    with Session(engine) as session:
+        yield session
+
+SessionDep = Annotated[Session, Depends(get_session)]

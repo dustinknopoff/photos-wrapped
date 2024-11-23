@@ -1,0 +1,18 @@
+{% extends "present/base.jinja" %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="/static/2.css" />
+<div class="container">
+    <ul class="photos">
+        {% for person in top_people %}
+        {% set name = person[0]%}
+        <li>
+            <img src="/{{person_to_photo[name] | urlencode}}" loading="lazy" />
+            <div class="description">
+                <p>{{name}} ({{person[1]}})</p>
+            </description>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

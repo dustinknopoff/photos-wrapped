@@ -186,6 +186,7 @@ pycparser==2.22
 pydantic==2.10.0
     # via fastapi
     # via photos-wrapped
+    # via sqlmodel
 pydantic-core==2.27.0
     # via pydantic
 pygments==2.18.0
@@ -339,6 +340,9 @@ sniffio==1.3.1
     # via anyio
     # via httpx
 sqlalchemy==2.0.36
+    # via photos-wrapped
+    # via sqlmodel
+sqlmodel==0.0.22
     # via photos-wrapped
 stack-data==0.6.3
     # via ipython

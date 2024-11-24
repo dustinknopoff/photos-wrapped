@@ -9,6 +9,7 @@
 #   generate-hashes: false
 
 -e file:.
+alembic==1.14.0
 annotated-types==0.7.0
     # via pydantic
 anyio==4.6.2.post1
@@ -108,6 +109,7 @@ mac-alias==2.2.2
 makelive==0.6.2
     # via osxphotos
 mako==1.2.4
+    # via alembic
     # via osxphotos
 markdown-it-py==3.0.0
     # via rich
@@ -340,6 +342,7 @@ sniffio==1.3.1
     # via anyio
     # via httpx
 sqlalchemy==2.0.36
+    # via alembic
     # via photos-wrapped
     # via sqlmodel
 sqlmodel==0.0.22
@@ -377,6 +380,7 @@ transformers==4.46.3
 typer==0.13.1
     # via fastapi-cli
 typing-extensions==4.12.2
+    # via alembic
     # via fastapi
     # via huggingface-hub
     # via pydantic

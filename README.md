@@ -2,7 +2,7 @@
 
 Spotify Wrapped for your Apple Photos Library.
 
-![](Sample%20Wrapped.png)
+![](output.gif)
 
 Uses `osxphotos` to extract from your photo library the following stats:
 
@@ -55,15 +55,6 @@ http://0.0.0.0:8000/1992 and it will compute for that year.
 The first run will save to disk the statistics and reuse every time from then onwards. If you'd like to force a rerun, you can provide the query parameter `force_reload` like to
 
 http://0.0.0.0:8000/1992?force_reload=true
-
-## All the Highlights look the same?
-
-
-Sometimes, all of the photos selected to highlight end up being near duplicates which is not ideal. In that case, you can run a script to recompute using machine learning to determine near duplicate photos and skip those in the highlights.
-
-```shell
-python -m src.photos_wrapped.workers.adhoc.compute_similarity_ml_worker --year 1992
-```
 
 Refreshing the page will show the newly selected photos to highlight.
 

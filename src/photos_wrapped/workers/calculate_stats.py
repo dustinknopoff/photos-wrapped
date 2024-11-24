@@ -49,7 +49,7 @@ while True:
             con.commit()
 
         stats = load_stats(json.loads(payload)["year"], force_reload=True)
-
+        
         # Mark it complete
         con.execute("UPDATE queue SET status = 2, response = ? WHERE id = ?", (json.dumps(stats), _id,))
         con.commit()

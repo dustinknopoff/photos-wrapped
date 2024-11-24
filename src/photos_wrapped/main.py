@@ -1,10 +1,9 @@
 import json
 from typing import Annotated
 from fastapi import FastAPI, Form, Request
-from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from fastapi import Depends, FastAPI, HTTPException, Query
+from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
 from pydantic import BaseModel

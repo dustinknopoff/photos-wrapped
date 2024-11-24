@@ -10,7 +10,10 @@ wheels/
 .venv
 tmp_assets/**
 !tmp_assets/.gitkeep
+# !tmp_assets/*unsplash.jpg
+# !tmp_assets/unsplash-*.jpg
 .DS_Store
 
 [0-9]*.json
+# !0.json
 *.db
